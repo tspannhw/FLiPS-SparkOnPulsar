@@ -12,12 +12,12 @@ bin/spark-shell  --packages io.streamnative.connectors:pulsar-spark-connector_2.
 ````
 val dfPulsar = spark.readStream.format("pulsar").option("service.url", "pulsar://localhost:6650").option("admin.url", "http://localhost:8080").option("topic", "persistent://public/default/chatresult2").load()
 dfPulsar.printSchema()
-val pQuery = dfPulsar.selectExpr("CAST(__key AS STRING)", "CAST(value AS STRING)").as[(String, String)].writeStream.format("console").start()
+val pQuery = dfPulsar.selectExpr("CAST(__key AS STRING)", "CAST(value AS STRING)").as[(String, String)].writeStream.format("console").option("truncate", "false").start()
 pQuery.explain()
 pQuery.awaitTermination()
+pQuery.stop()
 
 
-  
 ````
 
 ### output
