@@ -35,7 +35,8 @@ bin/spark-shell  --packages io.streamnative.connectors:pulsar-spark-connector_2.
 
 # <or>
 
-bin/spark-shell --master spark://pulsar1:7077 --packages io.streamnative.connectors:pulsar-spark-connector_2.12:3.1.1.3
+bin/spark-shell --master spark://pulsar1:7077 --driver-memory 4g --executor-memory 4g --packages io.streamnative.connectors:pulsar-spark-connector_2.12:3.1.1.3
+
 ````
 
 ### Spark Shell (Scala)
@@ -150,3 +151,4 @@ SparkSession available as 'spark'.
 * https://streamnative.io/blog/tech/2019-07-16-one-storage-system-for-both-real-time-and-historical-data-analysis-pulsar-story/
 * https://github.com/streamnative/pulsar-spark
 * https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html
+* https://spark.apache.org/docs/latest/spark-standalone.html
