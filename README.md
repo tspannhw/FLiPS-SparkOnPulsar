@@ -11,13 +11,20 @@ bin/spark-shell  --packages io.streamnative.connectors:pulsar-spark-connector_2.
 ### sql
 ````
 val dfPulsar = spark.readStream.format("pulsar").option("service.url", "pulsar://localhost:6650").option("admin.url", "http://localhost:8080").option("topic", "persistent://public/default/chatresult2").load()
+dfPulsar.printSchema()
+val pQuery = dfPulsar.selectExpr("CAST(__key AS STRING)", "CAST(value AS STRING)").as[(String, String)].writeStream.format("console").start()
+pQuery.explain()
+pQuery.awaitTermination()
+
+
+  
 ````
 
 ### output
 
 ````
 
-ark session available as 'spark'.
+Spark session available as 'spark'.
 Welcome to
       ____              __
      / __/__  ___ _____/ /__
@@ -46,3 +53,10 @@ root
 
 
 ````
+
+### Reference
+
+* https://github.com/yjshen/spark-connector-test
+* https://streamnative.io/blog/tech/2019-07-16-one-storage-system-for-both-real-time-and-historical-data-analysis-pulsar-story/
+* https://github.com/streamnative/pulsar-spark
+* https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html
