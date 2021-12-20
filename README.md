@@ -249,8 +249,8 @@ Batch: 2
 
 #### 1 server, 1 worker
 ````
-sbin/start-.sh 
-sbin/start-.sh --memory 2G spark://pulsar1:7077
+sbin/start-m*****.sh --memory 2G spark://pulsar1:7077
+sbin/start-worker.sh --memory 2G spark://pulsar1:7077
 
 ````
 
