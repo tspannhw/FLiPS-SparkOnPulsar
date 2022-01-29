@@ -254,6 +254,18 @@ sbin/start-worker.sh --memory 2G spark://pulsar1:7077
 
 ````
 
+### other query
+
+````
+val dfPulsar = spark.readStream.format("pulsar").option("service.url", "pulsar://localhost:6650").option("admin.url", "http://localhost:8080").option("topic", "persistent://public/default/iotjetsonjson").load()
+dfPulsar.printSchema()
+val pQuery = dfPulsar.selectExpr("*").writeStream.format("console").option("truncate", "false").start()
+
+pQuery.explain()
+pQuery.awaitTermination()
+pQuery.stop()
+````
+
 ### Reference
 
 * https://github.com/yjshen/spark-connector-test
